@@ -12,6 +12,12 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
       - name: Fetch data
+        run: curl -e '${{ secrets.FETCH_URL }}' ${{ secrets.FETCH_URL }} -o readings.json
+      - name: Commit data
         run: |
-          curl -e '${{ secrets.FETCH_URL }}' ${{ secrets.FETCH_URL }} -o readings.json
-          cat readings.json
+          git config user.name "git-scraper"
+          git config user.email "elliot.tormey+gitscraper@gmail.com"
+          git add readings.json
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
