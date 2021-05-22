@@ -10,14 +10,9 @@ jobs:
   scheduled:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup deno
-        uses: denoland/setup-deno@main
-        with:
-          deno-version: v1.10.2
       - name: Check out repo
         uses: actions/checkout@v2
       - name: Fetch data
-        uses: githubocto/flat@v2
-        with:
-          http_url: ${{ secrets.FETCH_URL }}
-          downloaded_filename: readings.json
+        run: |
+          curl -e '${{ secrets.FETCH_URL }}' ${{ secrets.FETCH_URL }} -o readings.json
+          cat readings.json
