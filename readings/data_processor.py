@@ -47,6 +47,8 @@ for raw_reading in raw_readings:
         if not raw_reading['latest_reading']['recorded_at'] in map(operator.itemgetter('recorded_at'), station_reading):
             reading = { 
                 'recorded_at': raw_reading['latest_reading']['recorded_at'], 
+                'date': raw_reading['latest_reading']['date'], 
+                'time': raw_reading['latest_reading']['time'], 
                 'location': raw_reading['location'], 
                 'pm10': raw_reading['latest_reading']['pm10'], 
                 'pm2_5': raw_reading['latest_reading']['pm2_5'], 
