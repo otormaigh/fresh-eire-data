@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - .github/workflows/flat.yml
+  workflow_dispatch:
+  schedule:
+    - cron:  '*/60 * * * *'
 
 jobs:
   scheduled:
